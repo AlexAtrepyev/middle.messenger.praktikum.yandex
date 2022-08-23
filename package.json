@@ -7,6 +7,7 @@
   },
   "scripts": {
     "dev": "parcel ./src/index.html",
+    "build": "parcel build ./src/index.html",
     "start": "parcel build ./src/index.html && node ./server.js"
   },
   "repository": {
