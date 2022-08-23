@@ -2,9 +2,12 @@
   "name": "middle.messenger.praktikum.yandex",
   "version": "1.0.0",
   "description": "Messenger",
-  "main": "index.js",
+  "engines" : {
+    "node" : ">=14.17.0"
+  },
   "scripts": {
-    "dev": "parcel ./src/index.html"
+    "dev": "parcel ./src/index.html",
+    "start": "parcel build ./src/index.html && node ./server.js"
   },
   "repository": {
     "type": "git",
@@ -18,6 +21,7 @@
   },
   "homepage": "https://github.com/AlexAtrepyev/middle.messenger.praktikum.yandex#readme",
   "devDependencies": {
+    "express": "^4.18.1",
     "parcel": "^2.7.0"
   }
 }

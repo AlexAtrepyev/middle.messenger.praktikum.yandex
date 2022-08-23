@@ -122,6 +122,7 @@ function getAttrs(str) {
   const regex = /(\w+)=\"([^"]+)\"/gi;
 
   const result = {};
+  let key;
   while ((key = regex.exec(str))) {
     result[key[1]] = key[2];
   }
