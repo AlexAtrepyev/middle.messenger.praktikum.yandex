@@ -1,0 +1,14 @@
+.field {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid lightgray;
+}
+
+.field__name {
+  color: black;
+}
+
+.field__value {
+  color: lightgray;
+}

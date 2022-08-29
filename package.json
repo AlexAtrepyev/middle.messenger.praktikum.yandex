@@ -1,0 +1,28 @@
+{
+  "name": "middle.messenger.praktikum.yandex",
+  "version": "1.0.0",
+  "description": "Messenger",
+  "engines" : {
+    "node" : ">=14.17.0"
+  },
+  "scripts": {
+    "dev": "parcel ./src/index.html",
+    "build": "parcel build ./src/index.html",
+    "start": "npm run build && node ./server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexAtrepyev/middle.messenger.praktikum.yandex.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlexAtrepyev/middle.messenger.praktikum.yandex/issues"
+  },
+  "homepage": "https://github.com/AlexAtrepyev/middle.messenger.praktikum.yandex#readme",
+  "devDependencies": {
+    "express": "4.18.1",
+    "parcel": "2.7.0"
+  }
+}
