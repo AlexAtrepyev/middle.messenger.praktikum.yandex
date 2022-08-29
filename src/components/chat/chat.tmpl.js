@@ -6,7 +6,7 @@ export default `
     <span className="chat__message">{{ message }}</span>
   </div>
   <div className="chat__container chat__container_align_center">
-    <span className="chat__time">{{ time }}</span>
+    <time className="chat__time">{{ time }}</time>
     <span className="chat__count">{{ count }}</span>
   </div>
 </li>

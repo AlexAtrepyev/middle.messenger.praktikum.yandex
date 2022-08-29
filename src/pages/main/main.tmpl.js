@@ -15,7 +15,7 @@ export default `
     <div className="feed__header">
       <div className="feed__container">
         <img className="feed__image" src="#" alt="image">
-        <h1 className="feed__name">Chat name</h1>
+        <h2 className="feed__name">Chat name</h2>
       </div>
       <div className="feed__container">
         <button>Add user</button>

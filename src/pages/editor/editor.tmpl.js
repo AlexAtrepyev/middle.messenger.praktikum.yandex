@@ -4,9 +4,9 @@ export default `
     <img className="editor__image" src="#" alt="image">
   </div>
   <form className="editor__container">
-    {{ first_name }}
-    {{ second_name }}
-    {{ display_name }}
+    {{ firstName }}
+    {{ secondName }}
+    {{ displayName }}
     {{ login }}
     {{ email }}
     {{ phone }}
