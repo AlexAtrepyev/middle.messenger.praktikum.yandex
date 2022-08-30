@@ -22,10 +22,17 @@ export default `
         <button>Remove user</button>
       </div>
     </div>
-    <div className="feed__input">
-      <input type="text" name="message">
-      <button>Send</button>
+    <div className="feed__messages">
+      {{ message_1 }}
+      {{ message_2 }}
+      {{ message_3 }}
+      {{ message_4 }}
+      {{ message_5 }}
     </div>
+    <form className="feed__input">
+      <input type="text" name="message">
+      <button type="submit">Send</button>
+    </form>
   </div>
 </main>
 `;
