@@ -1,4 +1,4 @@
-export default function isEmpty(value) {
+export default function isEmpty(value: any): boolean {
   switch (typeof value) {
     case 'object':
       if (value === null) {

@@ -11,7 +11,7 @@ import Profile from './pages/profile';
 import Registration from './pages/registration';
 import ServerError from './pages/server-error';
 
-function onClick(page) {
+function onClick(page: HTMLElement) {
   document.body.innerHTML = "";
   document.body.appendChild(page);
 }

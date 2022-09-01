@@ -1,5 +1,5 @@
 export default `
-<div className="input">
+<div class="input">
   <label>{{ label }}</label>
   <input type="{{ type }}" name="{{ name }}">
 </div>

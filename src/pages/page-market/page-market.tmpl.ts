@@ -1,8 +1,8 @@
 export default `
-<div className="page-market">
+<div class="page-market">
   <h1>Welcome!</h1>
   <p>This temporary page has been created to demonstrate project pages in the absence of routing</p>
-  <ul className="page-market__list">
+  <ul class="page-market__list">
     <button onclick="{{ Authorization }}">Authorization</button>
     <button onclick="{{ Registration }}">Registration</button>
     <button onclick="{{ Main }}">Main</button>
