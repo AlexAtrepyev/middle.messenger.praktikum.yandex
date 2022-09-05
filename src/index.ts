@@ -11,23 +11,23 @@ import Profile from './pages/profile';
 import Registration from './pages/registration';
 import ServerError from './pages/server-error';
 
-function onClick(page: HTMLElement) {
-  document.body.innerHTML = "";
-  document.body.appendChild(page);
+function rerender(content: HTMLElement) {
+  document.body.innerHTML = '';
+  document.body.appendChild(content);
 }
 
 window.addEventListener('DOMContentLoaded', () => {
-  const startPage = PageMarket.compile({
-    Authorization: () => onClick(Authorization),
-    Registration: () => onClick(Registration),
-    Main: () => onClick(Main),
-    Profile: () => onClick(Profile),
-    Editor: () => onClick(Editor),
-    PasswordChanger: () => onClick(PasswordChanger),
-    AvatarChanger: () => onClick(AvatarChanger),
-    NotFound: () => onClick(NotFound),
-    ServerError: () => onClick(ServerError)
+  const page = new PageMarket({
+    Authorization: () => rerender(new Authorization().getContent()!),
+    Registration: () => rerender(new Registration().getContent()!),
+    Main: () => rerender(new Main().getContent()!),
+    Profile: () => rerender(new Profile().getContent()!),
+    Editor: () => rerender(new Editor().getContent()!),
+    PasswordChanger: () => rerender(new PasswordChanger().getContent()!),
+    AvatarChanger: () => rerender(new AvatarChanger().getContent()!),
+    NotFound: () => rerender(new NotFound().getContent()!),
+    ServerError: () => rerender(new ServerError().getContent()!)
   });
   
-  document.body.appendChild(startPage);
+  document.body.appendChild(page.getContent()!);
 });

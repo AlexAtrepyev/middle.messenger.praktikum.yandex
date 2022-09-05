@@ -3,6 +3,14 @@ import './server-error.css';
 import template from './server-error.tmpl';
 import Templator from '../../utils/templator';
 
-const templator = new Templator(template);
+import Block from '../../utils/block';
 
-export default templator.compile({});
+export default class ServerError extends Block {
+  constructor() {
+    super();
+  }
+  
+  render() {
+    return new Templator(template).compile({});
+  }
+}

@@ -5,8 +5,14 @@ import Templator from '../../utils/templator';
 
 import ProfileField from '../../components/profile-field';
 
-const templator = new Templator(template);
+import Block from "../../utils/block";
 
-const context = { ProfileField };
-
-export default templator.compile(context);
+export default class Profile extends Block {
+  constructor() {
+    super();
+  }
+  
+  render() {
+    return new Templator(template).compile({ ProfileField });
+  }
+}

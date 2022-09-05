@@ -1,3 +1,3 @@
-import inputTmpl from './input';
+import Input from './input';
 
-export default inputTmpl;
+export default Input;

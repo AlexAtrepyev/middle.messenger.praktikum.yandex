@@ -1,3 +1,3 @@
-import chatTmpl from './chat';
+import Chat from './chat';
 
-export default chatTmpl;
+export default Chat;

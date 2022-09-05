@@ -6,8 +6,14 @@ import Templator from '../../utils/templator';
 import Chat from '../../components/chat';
 import Message from '../../components/message';
 
-const templator = new Templator(template);
+import Block from '../../utils/block';
 
-const context = { Chat, Message };
-
-export default templator.compile(context);
+export default class Main extends Block {
+  constructor() {
+    super();
+  }
+  
+  render() {
+    return new Templator(template).compile({ Chat, Message });
+  }
+}

@@ -1,3 +1,3 @@
-import messageTmpl from './message';
+import Message from './message';
 
-export default messageTmpl;
+export default Message;

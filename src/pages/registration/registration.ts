@@ -5,8 +5,14 @@ import Templator from '../../utils/templator';
 
 import Input from '../../components/input';
 
-const templator = new Templator(template);
+import Block from "../../utils/block";
 
-const context = { Input };
-
-export default templator.compile(context);
+export default class Registration extends Block {
+  constructor() {
+    super();
+  }
+  
+  render() {
+    return new Templator(template).compile({ Input });
+  }
+}

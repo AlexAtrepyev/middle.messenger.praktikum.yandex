@@ -1,3 +1,3 @@
-import profileFieldTmpl from './profile-field';
+import ProfileField from './profile-field';
 
-export default profileFieldTmpl;
+export default ProfileField;

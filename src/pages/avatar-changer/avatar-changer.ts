@@ -3,6 +3,14 @@ import './avatar-changer.css';
 import template from './avatar-changer.tmpl';
 import Templator from '../../utils/templator';
 
-const templator = new Templator(template);
+import Block from "../../utils/block";
 
-export default templator.compile({});
+export default class AvatarChanger extends Block {
+  constructor() {
+    super();
+  }
+  
+  render() {
+    return new Templator(template).compile({});
+  }
+}

@@ -297,8 +297,8 @@ function setElements(order: { node: TVirtualDom, parent: TVirtualDom | undefined
     
     if (node.tag) {
       if (startsWithUpperCase(node.tag)) {
-        const tmpl = get(ctx, node.tag);
-        node.element = tmpl.compile(node.attrs);
+        const Class = get(ctx, node.tag);
+        node.element = new Class({ ...node.attrs }).getContent();
       } else {
         const element = document.createElement(node.tag);
         if (node.attrs) {
@@ -325,7 +325,7 @@ function setElements(order: { node: TVirtualDom, parent: TVirtualDom | undefined
 function getHTML(order: { node: TVirtualDom, parent: TVirtualDom | undefined }[]): HTMLElement {
   order.forEach(item => {
     const { node, parent } = item;
-
+    
     // what a crutch, man? refactoring is required
     if (parent && parent.element && node.element) {
       parent.element.appendChild(node.element);
