@@ -303,9 +303,9 @@ function setElements(order: { node: TVirtualDom, parent: TVirtualDom | undefined
         const element = document.createElement(node.tag);
         if (node.attrs) {
           Object.keys(node.attrs).forEach(key => {
-            const value = replaceTmplValues(node.attrs![key], ctx)
-            if (key === 'onclick') {
-              element.addEventListener('click', value);
+            const value = replaceTmplValues(node.attrs![key], ctx);
+            if (key === 'onclick' || key === 'onfocus' || key === 'onblur' || key === 'onsubmit') {
+              element.addEventListener(key.slice(2), value);
             } else {
               element.setAttribute(key, value);
             }
