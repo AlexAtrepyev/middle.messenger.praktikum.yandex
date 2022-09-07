@@ -3,7 +3,7 @@ export default function isInputValid(name: string, value: string): boolean {
   const LOGIN_REGEXP = /^(?=.*[a-zA-Z].*)[\w-]{3,20}$/;
   const EMAIL_REGEXP = /^[\w-]+@[a-zA-z]+\.[a-zA-z]+$/;
   const PASSWORD_REGEXP = /^(?=.*[A-Z].*)(?=.*[0-9].*).{8,40}$/;
-  const PHONE_REGEXP = /^[(?:+?)\d]{10,15}$/;
+  const PHONE_REGEXP = /^\+?\d{10,15}$/;
   const MESSAGE_REGEXP = /.+/;
 
   switch (name) {
