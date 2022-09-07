@@ -18,12 +18,12 @@ export default class Editor extends Block {
     e.preventDefault();
 
     const formData = getFormData(this.getContent()!);
-    
+
     if (isFormValid(formData)) {
       console.log(formData);
     }
   }
-  
+
   render() {
     return new Templator(template).compile({ Input, onSubmit: this.onSubmit.bind(this) });
   }

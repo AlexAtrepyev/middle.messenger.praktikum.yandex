@@ -1,18 +1,21 @@
-import EventBus from "./eventBus";
+import EventBus from './eventBus';
 
 export default class Block {
   static EVENTS = {
-    INIT: "init",
-    FLOW_CDM: "flow:component-did-mount",
-    FLOW_CDU: "flow:component-did-update",
-    FLOW_RENDER: "flow:render"
+    INIT: 'init',
+    FLOW_CDM: 'flow:component-did-mount',
+    FLOW_CDU: 'flow:component-did-update',
+    FLOW_RENDER: 'flow:render',
   };
 
   protected props: Record<string, unknown>;
+
   private eventBus: () => EventBus;
+
   private _element: HTMLElement | null = null;
+
   private _meta: { tagName: string, props: any };
-  
+
   constructor(props: any = {}) {
     const tagName = 'div';
     const eventBus = new EventBus();
@@ -22,7 +25,7 @@ export default class Block {
     this.props = this._makePropsProxy(props);
 
     this.eventBus = () => eventBus;
-    
+
     this._registerEvents(eventBus);
 
     eventBus.emit(Block.EVENTS.INIT);
@@ -31,7 +34,7 @@ export default class Block {
   _addEvents() {
     const { events = {} } = this.props as { events: Record<string, () => void> };
 
-    Object.keys(events).forEach(eventName => {
+    Object.keys(events).forEach((eventName) => {
       this._element!.addEventListener(eventName, events[eventName]);
     });
   }
@@ -44,8 +47,8 @@ export default class Block {
   }
 
   _createResources() {
-    const { tagName } = this._meta;
-    this._element = this._createDocumentElement(tagName);
+    // const { tagName } = this._meta;
+    this._element = this._createDocumentElement();
   }
 
   init() {
@@ -60,9 +63,9 @@ export default class Block {
 
   componentDidMount() {}
 
-	dispatchComponentDidMount() {
-		this.eventBus().emit(Block.EVENTS.FLOW_CDM);
-	}
+  dispatchComponentDidMount() {
+    this.eventBus().emit(Block.EVENTS.FLOW_CDM);
+  }
 
   _componentDidUpdate(oldProps: any, newProps: any) {
     if (this.componentDidUpdate(oldProps, newProps)) {
@@ -88,7 +91,7 @@ export default class Block {
 
   _render() {
     const block = this.render();
-    
+
     this._element = block;
 
     // this._addEvents();
@@ -108,23 +111,23 @@ export default class Block {
     return new Proxy(props, {
       get(target, prop) {
         const value = target[prop];
-        return typeof value === "function" ? value.bind(target) : value;
+        return typeof value === 'function' ? value.bind(target) : value;
       },
       set(target, prop, value) {
-        const oldTarget = { ... target };
+        const oldTarget = { ...target };
 
         target[prop] = value;
-        
+
         self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, target);
         return true;
       },
       deleteProperty() {
-        throw new Error("Нет доступа");
-      }
+        throw new Error('Нет доступа');
+      },
     });
   }
 
-  _createDocumentElement(tagName: string) {
-    return document.createElement(tagName);
+  _createDocumentElement(): HTMLElement {
+    return document.createElement(this._meta.tagName);
   }
 }

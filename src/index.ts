@@ -26,8 +26,8 @@ window.addEventListener('DOMContentLoaded', () => {
     PasswordChanger: () => rerender(new PasswordChanger().getContent()!),
     AvatarChanger: () => rerender(new AvatarChanger().getContent()!),
     NotFound: () => rerender(new NotFound().getContent()!),
-    ServerError: () => rerender(new ServerError().getContent()!)
+    ServerError: () => rerender(new ServerError().getContent()!),
   });
-  
+
   document.body.appendChild(page.getContent()!);
 });

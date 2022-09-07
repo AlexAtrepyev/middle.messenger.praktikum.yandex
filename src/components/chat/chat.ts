@@ -3,7 +3,7 @@ import './chat.css';
 import template from './chat.tmpl';
 import Templator from '../../utils/templator';
 
-import Block from "../../utils/block";
+import Block from '../../utils/block';
 
 interface ChatProps {
   name: string,

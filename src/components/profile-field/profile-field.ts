@@ -3,7 +3,7 @@ import './profile-field.css';
 import template from './profile-field.tmpl';
 import Templator from '../../utils/templator';
 
-import Block from "../../utils/block";
+import Block from '../../utils/block';
 
 interface ProfileFieldProps {
   name: string,

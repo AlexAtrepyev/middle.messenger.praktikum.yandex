@@ -3,7 +3,7 @@ import './message.css';
 import template from './message.tmpl';
 import Templator from '../../utils/templator';
 
-import Block from "../../utils/block";
+import Block from '../../utils/block';
 
 interface MessageProps {
   type: string,

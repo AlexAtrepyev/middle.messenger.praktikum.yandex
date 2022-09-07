@@ -19,12 +19,12 @@ export default class Main extends Block {
     e.preventDefault();
 
     const formData = getFormData(this.getContent()!);
-    
+
     if (isFormValid(formData)) {
       console.log(formData);
     }
   }
-  
+
   render() {
     return new Templator(template).compile({ Chat, Message, onSubmit: this.onSubmit.bind(this) });
   }

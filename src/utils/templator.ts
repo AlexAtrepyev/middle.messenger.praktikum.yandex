@@ -38,9 +38,8 @@ function getTagType(str: string): string {
   const key = regex.exec(str);
   if (key) {
     return key[1];
-  } else {
-    return '';
   }
+  return '';
 }
 
 function isClosingTag(str: string): boolean {
@@ -60,7 +59,7 @@ function isComponent(str: string): boolean {
 }
 
 function findBorderByStart(arr: TBorders[], start: number): TBorders | undefined {
-  return arr.find(item => item.start === start);
+  return arr.find((item) => item.start === start);
 }
 
 function getTagBorders(lines: string[]) {
@@ -70,7 +69,7 @@ function getTagBorders(lines: string[]) {
   lines.forEach((line, index) => {
     if (isTag(line)) {
       const tag = getTagType(line);
-      
+
       if (isClosingTag(tag)) {
         const lastTag = last(stack);
 
@@ -80,18 +79,16 @@ function getTagBorders(lines: string[]) {
             stack.pop();
           }
         }
+      } else if (isSingleTag(tag) || /<\/.+?>/i.test(line) || isComponent(line)) {
+        borders.push({ start: index, end: index });
       } else {
-        if (isSingleTag(tag) || /<\/.+?>/i.test(line) || isComponent(line)) { // THERE
-          borders.push({ start: index, end: index });
-        } else {
-          stack.push({ index, tag });
-        }
+        stack.push({ index, tag });
       }
     }
   });
 
-  const startBorders = sort(borders.map(border => border.start));
-  
+  const startBorders = sort(borders.map((border) => border.start));
+
   return startBorders.reduce((acc: TBorders[], item) => {
     const border = findBorderByStart(borders, item);
     if (border) {
@@ -105,8 +102,8 @@ function findNodeByStart(node: TVirtualDom, start: number): TVirtualDom | undefi
   if (node.borders.start === start) {
     return node;
   }
-  
-  for (let child of node.children) {
+
+  for (const child of node.children) {
     const childNode = findNodeByStart(child, start);
     if (childNode) {
       return childNode;
@@ -115,35 +112,37 @@ function findNodeByStart(node: TVirtualDom, start: number): TVirtualDom | undefi
 }
 
 function getHierarchy(borders: TBorders[]): TVirtualDom {
-  let vDom: TVirtualDom | undefined = undefined;
-  
+  let vDom: TVirtualDom | undefined;
+
   borders.forEach((item, index) => {
     let prevIndex = index;
     let hasParent = false;
-    
+
     while (prevIndex--) {
       const prevItem = borders[prevIndex];
-      
+
       if (item.start > prevItem.start && item.end < prevItem.end) {
         hasParent = true;
 
         if (vDom) {
           const node = findNodeByStart(vDom, prevItem.start);
-          
-          node && node.children.push({
-            borders: { start: item.start, end: item.end },
-            children: []
-          });
+
+          if (node) {
+            node.children.push({
+              borders: { start: item.start, end: item.end },
+              children: [],
+            });
+          }
         }
-        
+
         break;
       }
     }
-    
+
     if (!hasParent) {
       vDom = {
         borders: { start: item.start, end: item.end },
-        children: []
+        children: [],
       };
     }
   });
@@ -151,12 +150,12 @@ function getHierarchy(borders: TBorders[]): TVirtualDom {
   if (!vDom) {
     throw new Error('Ошибка в шаблоне');
   }
-  
+
   return vDom;
 }
 
 function getTag(str: string): string | undefined {
-  const regex =  /^<(\w+)/i;
+  const regex = /^<(\w+)/i;
 
   const key = regex.exec(str);
   if (key) {
@@ -167,7 +166,7 @@ function getTag(str: string): string | undefined {
 }
 
 function getAttrs(str: string): { [key: string]: string } | undefined {
-  const regex = /(\w+)=\"([^"]+)\"/gi;
+  const regex = /(\w+)="([^"]+)"/gi;
 
   const result: { [key: string]: string } = {};
   let key: RegExpExecArray | null;
@@ -176,7 +175,7 @@ function getAttrs(str: string): { [key: string]: string } | undefined {
       result[key[1]] = key[2];
     }
   }
-  
+
   return isEmpty(result) ? undefined : result;
 }
 
@@ -190,11 +189,11 @@ function getContent(str: string): string | undefined {
 }
 
 function getVirtualDom(hierarchy: TVirtualDom, borders: TBorders[], array: string[]): TVirtualDom {
-  borders.reverse().forEach(item => {
+  borders.reverse().forEach((item) => {
     const node = findNodeByStart(hierarchy, item.start);
     if (node) {
       const line = array[item.start];
-    
+
       if (item.start === item.end) {
         node.tag = getTag(line);
         node.attrs = getAttrs(line);
@@ -202,9 +201,9 @@ function getVirtualDom(hierarchy: TVirtualDom, borders: TBorders[], array: strin
       } else {
         node.tag = getTag(line);
         node.attrs = getAttrs(line);
-        
+
         const multiLines = array.slice(item.start + 1, item.end);
-        multiLines.forEach((multiLine, index) => {
+        multiLines.forEach((multiLine) => {
           if (!isTag(multiLine)) {
             node.textContent = getContent(multiLine);
             // if (node.children) {
@@ -223,21 +222,21 @@ function getVirtualDom(hierarchy: TVirtualDom, borders: TBorders[], array: strin
 function getRenderOrder(vDom: TVirtualDom) {
   const stash: TVirtualDom[] = [];
   const order: { node: TVirtualDom, parent: TVirtualDom| undefined }[] = [];
-  
+
   function fn(node: TVirtualDom) {
     order.push({ node, parent: last(stash) });
     stash.push(node);
-    
+
     if (isEmpty(node.children)) {
       stash.pop();
     } else {
-      for (let child of node.children) {
+      for (const child of node.children) {
         fn(child);
       }
       stash.pop();
     }
   }
-  
+
   fn(vDom);
 
   return order;
@@ -249,16 +248,16 @@ function startsWithUpperCase(str: string) {
 
 function get(obj: { [key: string]: any }, path: string): any {
   const keys = path.split('.');
-  
+
   let result = obj;
-  for (let key of keys) {
+  for (const key of keys) {
     result = result[key];
-    
+
     if (result === undefined) {
       return undefined;
     }
   }
-  
+
   return result;
 }
 
@@ -268,33 +267,36 @@ function replaceTmplValues(tmpl: string, ctx: { [key: string]: any }): any {
   let key: any;
   while ((key = regex.exec(tmpl))) {
     if (key[1]) {
-      let tmplValue = key[1].trim();
+      const tmplValue = key[1].trim();
       const data = get(ctx, tmplValue);
-      
+
       if (data) {
         // joining is required
-        if (typeof data === "function") {
+        if (typeof data === 'function') {
           tmpl = data;
           continue;
         }
-        
+
         if (data.isHtml) {
           tmpl = data;
           continue;
         }
       }
-      
-      tmpl = tmpl.replace(new RegExp(key[0], "gi"), data);
+
+      tmpl = tmpl.replace(new RegExp(key[0], 'gi'), data);
     }
   }
-  
+
   return tmpl;
 }
 
-function setElements(order: { node: TVirtualDom, parent: TVirtualDom | undefined }[], ctx: { [key: string]: any }) {
-  order.forEach(item => {
-    const node = item.node;
-    
+function setElements(
+  order: { node: TVirtualDom, parent: TVirtualDom | undefined }[],
+  ctx: { [key: string]: any },
+) {
+  order.forEach((item) => {
+    const { node } = item;
+
     if (node.tag) {
       if (startsWithUpperCase(node.tag)) {
         const Class = get(ctx, node.tag);
@@ -302,7 +304,7 @@ function setElements(order: { node: TVirtualDom, parent: TVirtualDom | undefined
       } else {
         const element = document.createElement(node.tag);
         if (node.attrs) {
-          Object.keys(node.attrs).forEach(key => {
+          Object.keys(node.attrs).forEach((key) => {
             const value = replaceTmplValues(node.attrs![key], ctx);
             if (key === 'onclick' || key === 'onfocus' || key === 'onblur' || key === 'onsubmit') {
               element.addEventListener(key.slice(2), value);
@@ -312,10 +314,10 @@ function setElements(order: { node: TVirtualDom, parent: TVirtualDom | undefined
           });
         }
         if (node.textContent) {
-          const value = replaceTmplValues(node.textContent, ctx)
+          const value = replaceTmplValues(node.textContent, ctx);
           element.textContent = value;
         }
-        
+
         node.element = element;
       }
     }
@@ -323,9 +325,9 @@ function setElements(order: { node: TVirtualDom, parent: TVirtualDom | undefined
 }
 
 function getHTML(order: { node: TVirtualDom, parent: TVirtualDom | undefined }[]): HTMLElement {
-  order.forEach(item => {
+  order.forEach((item) => {
     const { node, parent } = item;
-    
+
     // what a crutch, man? refactoring is required
     if (parent && parent.element && node.element) {
       parent.element.appendChild(node.element);
@@ -337,6 +339,7 @@ function getHTML(order: { node: TVirtualDom, parent: TVirtualDom | undefined }[]
 
 export default class Templator {
   private tmpl: string;
+
   private virtualDom: TVirtualDom;
 
   constructor(tmpl: string) {
@@ -352,14 +355,14 @@ export default class Templator {
     if (!hierarchy) {
       throw new Error('Ошибка в шаблоне');
     }
-    
+
     return getVirtualDom(hierarchy, tagBorders, tmplArray);
   }
 
   compile(ctx: { [key: string]: any }): HTMLElement {
     const order = getRenderOrder(this.virtualDom);
     setElements(order, ctx);
-    
+
     return getHTML(order);
   }
-};
+}

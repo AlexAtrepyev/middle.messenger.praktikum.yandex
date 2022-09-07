@@ -9,7 +9,7 @@ export default class NotFound extends Block {
   constructor() {
     super();
   }
-  
+
   render() {
     return new Templator(template).compile({});
   }

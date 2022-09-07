@@ -3,7 +3,7 @@ import './input.css';
 import template from './input.tmpl';
 import Templator from '../../utils/templator';
 
-import Block from "../../utils/block";
+import Block from '../../utils/block';
 
 import isInputValid from '../../utils/isInputValid';
 
@@ -26,10 +26,18 @@ export default class Input extends Block {
 
   toogleClass() {
     const input = this.getContent()!.querySelector('input')!;
-    this.isValid() ? input.classList.remove('input__field_invalid') : input.classList.add('input__field_invalid');
+
+    if (this.isValid()) {
+      input.classList.remove('input__field_invalid');
+    } else {
+      input.classList.add('input__field_invalid');
+    }
   }
-  
+
   render() {
-    return new Templator(template).compile({ ...this.props, checkValidity: this.toogleClass.bind(this) });
+    return new Templator(template).compile({
+      ...this.props,
+      checkValidity: this.toogleClass.bind(this),
+    });
   }
 }
