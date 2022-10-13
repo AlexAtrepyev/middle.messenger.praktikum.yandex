@@ -6,6 +6,6 @@ export default `
     <Input label="Password" type="password" name="password" />
     <button>Sign in</button>
   </form>
-  <a href="#">Create account</a>
+  <Link to="/sign-up" text="Create account" />
 </div>
 `;

@@ -7,6 +7,7 @@ import Chat from '../../components/chat';
 import Message from '../../components/message';
 
 import Block from '../../utils/block';
+import Link from '../../components/link';
 
 import { getFormData, isFormValid } from '../../utils/formUtils';
 
@@ -26,6 +27,11 @@ export default class Main extends Block {
   }
 
   render() {
-    return new Templator(template).compile({ Chat, Message, onSubmit: this.onSubmit.bind(this) });
+    return new Templator(template).compile({
+      Chat,
+      Message,
+      Link,
+      onSubmit: this.onSubmit.bind(this),
+    });
   }
 }

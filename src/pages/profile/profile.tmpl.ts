@@ -19,9 +19,9 @@ export default `
     {{ phone }}
   </ul>
   <div class="profile__container">
-    <a href="#">Edit data</a>
-    <a href="#">Change password</a>
-    <a href="#">Log out</a>
+    <Link to="/settings/editor" text="Edit data" />
+    <Link to="/settings/password" text="Change password" />
+    <button class="link">Log out</button>
   </div>
 </div>
 `;

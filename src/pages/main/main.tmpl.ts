@@ -2,7 +2,7 @@ export default `
 <main class="main">
   <div class="sidebar">
     <div class="settings">
-      <a href="#">Profile</a>
+      <Link to="/settings" text="Profile" />
       <input type="search" name="search">
     </div>
     <ul class="chats">

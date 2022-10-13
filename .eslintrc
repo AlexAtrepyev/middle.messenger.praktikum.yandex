@@ -8,7 +8,7 @@
   "rules": {
     "max-len": ["error", { "code": 100, "ignoreTemplateLiterals": true }],
     "@typescript-eslint/no-unused-vars": "warn",
-    "no-underscore-dangle": ["error", { "allowAfterThis": true }],
+    "no-underscore-dangle": "off",
     "no-shadow": "off",
     "class-methods-use-this": "off",
     "import/no-unresolved": "off",
@@ -21,6 +21,11 @@
     "prefer-destructuring": "warn",
     "no-continue": "off",
     "no-param-reassign": "warn",
-    "no-useless-constructor": "warn"
+    "no-useless-constructor": "warn",
+    "max-classes-per-file": "off",
+    "no-prototype-builtins": "warn",
+    "new-cap": "warn",
+    "no-constructor-return": "warn",
+    "no-use-before-define": "warn"
   }
 }

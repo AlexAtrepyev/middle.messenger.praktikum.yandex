@@ -10,6 +10,6 @@ export default `
     <Input label="Phone" type="number" name="phone" />
     <button>Sign up</button>
   </form>
-  <a href="#">Sign in</a>
+  <Link to="/" text="Sign in" />
 </div>
 `;

@@ -6,6 +6,7 @@ import Templator from '../../utils/templator';
 import Input from '../../components/input';
 
 import Block from '../../utils/block';
+import Link from '../../components/link';
 
 import { getFormData, isFormValid } from '../../utils/formUtils';
 
@@ -25,6 +26,6 @@ export default class Registration extends Block {
   }
 
   render() {
-    return new Templator(template).compile({ Input, onSubmit: this.onSubmit.bind(this) });
+    return new Templator(template).compile({ Input, Link, onSubmit: this.onSubmit.bind(this) });
   }
 }

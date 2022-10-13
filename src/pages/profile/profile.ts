@@ -6,6 +6,7 @@ import Templator from '../../utils/templator';
 import ProfileField from '../../components/profile-field';
 
 import Block from '../../utils/block';
+import Link from '../../components/link';
 
 export default class Profile extends Block {
   constructor() {
@@ -13,6 +14,6 @@ export default class Profile extends Block {
   }
 
   render() {
-    return new Templator(template).compile({ ProfileField });
+    return new Templator(template).compile({ ProfileField, Link });
   }
 }

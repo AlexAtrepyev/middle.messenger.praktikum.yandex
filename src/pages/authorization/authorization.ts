@@ -4,6 +4,7 @@ import template from './authorization.tmpl';
 import Templator from '../../utils/templator';
 
 import Input from '../../components/input';
+import Link from '../../components/link';
 
 import Block from '../../utils/block';
 
@@ -25,6 +26,6 @@ export default class Authorization extends Block {
   }
 
   render() {
-    return new Templator(template).compile({ Input, onSubmit: this.onSubmit.bind(this) });
+    return new Templator(template).compile({ Input, Link, onSubmit: this.onSubmit.bind(this) });
   }
 }
