@@ -1,4 +1,4 @@
-enum METHOD {
+enum Method {
   GET = 'GET',
   POST = 'POST',
   PUT = 'PUT',
@@ -6,7 +6,7 @@ enum METHOD {
 }
 
 type Options = {
-  method: METHOD;
+  method: Method;
   data?: any;
 };
 
@@ -23,27 +23,27 @@ function queryStringify(data: object) {
 
 export default class HTTPTransport {
   get(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
-    return this.request(url, { ...options, method: METHOD.GET });
+    return this.request(url, { ...options, method: Method.GET });
   }
 
   post(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
-    return this.request(url, { ...options, method: METHOD.POST });
+    return this.request(url, { ...options, method: Method.POST });
   }
 
   put(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
-    return this.request(url, { ...options, method: METHOD.PUT });
+    return this.request(url, { ...options, method: Method.PUT });
   }
 
   delete(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
-    return this.request(url, { ...options, method: METHOD.DELETE });
+    return this.request(url, { ...options, method: Method.DELETE });
   }
 
-  request(url: string, options: Options = { method: METHOD.GET }): Promise<XMLHttpRequest> {
+  request(url: string, options: Options = { method: Method.GET }): Promise<XMLHttpRequest> {
     const { method, data } = options;
 
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
-      const isGet = method === METHOD.GET;
+      const isGet = method === Method.GET;
 
       xhr.open(method, isGet && !!data ? `${url}${queryStringify(data)}` : url);
 
