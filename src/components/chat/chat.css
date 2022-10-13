@@ -35,10 +35,6 @@
   overflow: hidden;
 }
 
-.chat__container {}
-
-.chat__time {}
-
 .chat__count {
   width: 20px;
   height: 20px;

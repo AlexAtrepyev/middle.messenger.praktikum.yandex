@@ -4,3 +4,13 @@
   justify-content: space-between;
   gap: 10px;
 }
+
+.input__field {
+  border-color: black;
+  color: black;
+}
+
+.input__field_invalid {
+  border-color: red;
+  color: red;
+}

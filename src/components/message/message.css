@@ -1,0 +1,27 @@
+.message {
+  border-radius: 10px;
+  max-width: 50%;
+  box-sizing: border-box;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.message_type_mine {
+  background: rgb(228 237 253);
+  align-self: flex-end;
+}
+
+.message_type_others {
+  background: rgb(248 248 248);
+  align-self: flex-start;
+}
+
+.message__time {
+  color: rgb(153 153 153);
+  align-self: flex-end;
+}
+
+.message_type_mine .message__time {
+  color: rgb(51 105 243);
+}
