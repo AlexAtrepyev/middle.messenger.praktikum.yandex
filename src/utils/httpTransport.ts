@@ -10,8 +10,6 @@ type Options = {
   data?: any;
 };
 
-type OptionsWithoutMethod = Omit<Options, 'method'>;
-
 export default class HTTPTransport {
   protected url: string;
 
@@ -19,23 +17,24 @@ export default class HTTPTransport {
     this.url = url;
   }
 
-  public get(endpoint: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
-    return this.request(`${this.url}${endpoint}`, { ...options, method: Method.GET });
+  public get<Response>(endpoint: string): Promise<Response> {
+    return this.request<Response>(`${this.url}${endpoint}`);
   }
 
-  public post(endpoint: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
-    return this.request(`${this.url}${endpoint}`, { ...options, method: Method.POST });
+  public post<Response>(endpoint: string, data?: any): Promise<Response> {
+    return this.request<Response>(`${this.url}${endpoint}`, { ...data, method: Method.POST });
   }
 
-  public put(endpoint: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
-    return this.request(`${this.url}${endpoint}`, { ...options, method: Method.PUT });
+  public put<Response>(endpoint: string, data?: any): Promise<Response> {
+    return this.request<Response>(`${this.url}${endpoint}`, { ...data, method: Method.PUT });
   }
 
-  public delete(endpoint: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
-    return this.request(`${this.url}${endpoint}`, { ...options, method: Method.DELETE });
+  public delete<Response>(endpoint: string, data?: any): Promise<Response> {
+    return this.request<Response>(`${this.url}${endpoint}`, { ...data, method: Method.DELETE });
   }
 
-  private request(url: string, options: Options = { method: Method.GET }): Promise<XMLHttpRequest> {
+  private request<Response>(url: string, options: Options = { method: Method.GET }):
+  Promise<Response> {
     const { method, data } = options;
 
     return new Promise((resolve, reject) => {
@@ -64,7 +63,6 @@ export default class HTTPTransport {
         if (method === Method.GET || !data) {
           xhr.send();
         } else {
-          console.log(data);
           xhr.send(JSON.stringify(data));
         }
       }

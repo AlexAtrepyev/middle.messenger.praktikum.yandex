@@ -30,6 +30,7 @@ export default class Profile extends Block {
 
   render() {
     return new Templator(template).compile({
+      profileName: `${this.props.first_name} ${this.props.second_name}`,
       ProfileField,
       Link,
       onLogout: this.onLogout.bind(this),

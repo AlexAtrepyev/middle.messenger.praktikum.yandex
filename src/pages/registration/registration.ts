@@ -20,7 +20,6 @@ export default class Registration extends Block {
     const formData = getFormData(this.getContent()!) as TSignupData;
 
     if (isFormValid(formData)) {
-      console.log(formData);
       AuthController.signup(formData);
     }
   }

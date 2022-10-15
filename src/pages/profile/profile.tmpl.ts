@@ -2,7 +2,7 @@ export default `
 <div class="profile">
   <div class="profile__container">
     <img class="profile__image" src="{{ avatarLink }}" alt="image">
-    <h1 class="profile__name">Profile name</h1>
+    <h1 class="profile__name">{{ profileName }}</h1>
   </div>
   <ul class="profile__container">
     <ProfileField name="First name" value="{{ first_name }}" />

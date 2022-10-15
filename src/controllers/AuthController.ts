@@ -2,6 +2,7 @@ import api, { AuthApi } from '../api/AuthApi';
 import { TSigninData, TSignupData } from '../types';
 import Router from '../utils/Router';
 import store from '../utils/Store';
+import MessagesController from './MessagesController';
 
 export class AuthController {
   private readonly api: AuthApi;
@@ -11,19 +12,23 @@ export class AuthController {
   }
 
   async signin(data: TSigninData) {
-    await this.api.signin(data);
-
-    await this.getUser();
-
-    Router.go('/settings');
+    try {
+      await this.api.signin(data);
+      await this.getUser();
+      Router.go('/messenger');
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   async signup(data: TSignupData) {
-    await this.api.signup(data);
-
-    await this.getUser();
-
-    Router.go('/settings');
+    try {
+      await this.api.signup(data);
+      await this.getUser();
+      Router.go('/messenger');
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   async getUser() {
@@ -33,9 +38,13 @@ export class AuthController {
   }
 
   async logout() {
-    await this.api.logout();
-
-    Router.go('/');
+    try {
+      MessagesController.closeAll();
+      await this.api.logout();
+      Router.go('/');
+    } catch (e) {
+      console.log(e);
+    }
   }
 }
 

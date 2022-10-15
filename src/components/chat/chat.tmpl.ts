@@ -1,5 +1,5 @@
 export default `
-<li class="chat">
+<li class="chat {{ isSelected }}" onclick="{{ onClick }}">
   <img class="chat__image" src="{{ avatar }}" alt="image">
   <div class="chat__container">
     <h2 class="chat__name">{{ title }}</h2>

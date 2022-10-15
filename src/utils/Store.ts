@@ -1,7 +1,6 @@
 import EventBus from './eventBus';
 import set from './set';
-import Block from './block';
-import isEqual from './isEqual';
+import { TChat, TMessage } from '../types';
 
 export enum StateEvents {
   UPDATED = 'UPDATED'
@@ -18,14 +17,11 @@ type TState = {
     phone: string;
     second_name: string;
   },
-  chats?: {
-    avatar: string | null;
-    created_by: number;
-    id: number;
-    last_message: any;
-    title: string;
-    unread_count: number;
-  }[]
+  chats?: TChat[],
+  selectedChat?: number,
+  messages?: {
+    [key: string]: TMessage[]
+  }
 };
 
 class Store extends EventBus {
@@ -43,30 +39,5 @@ class Store extends EventBus {
 }
 
 const store = new Store();
-
-export function withStore(mapStateToProps: (state: any) => any) {
-  return function wrap(Component: typeof Block) {
-    let previousState: any;
-
-    return class WithStore extends Component {
-      constructor(props: any) {
-        previousState = mapStateToProps(store.getState());
-
-        super({ ...props, ...previousState });
-
-        store.on(StateEvents.UPDATED, () => {
-          const stateProps = mapStateToProps(store.getState());
-
-          if (isEqual(previousState, stateProps)) {
-            return;
-          }
-          previousState = stateProps;
-
-          this.setProps({ ...stateProps });
-        });
-      }
-    };
-  };
-}
 
 export default store;

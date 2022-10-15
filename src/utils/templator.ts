@@ -279,7 +279,6 @@ function replaceTmplValues(tmpl: string, ctx: { [key: string]: any }): any {
 
         if (data.isHtml) {
           tmpl = data;
-          console.log(tmpl);
           continue;
         }
       }

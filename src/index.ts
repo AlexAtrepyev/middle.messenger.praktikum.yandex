@@ -1,3 +1,4 @@
+import AuthController from './controllers/AuthController';
 import './index.css';
 
 // import PageMarket from './pages/page-market';
@@ -12,9 +13,6 @@ import Registration from './pages/registration';
 import ServerError from './pages/server-error';
 
 import Router from './utils/Router';
-import Store from './utils/Store';
-
-window.store = Store;
 
 window.addEventListener('DOMContentLoaded', () => {
   Router

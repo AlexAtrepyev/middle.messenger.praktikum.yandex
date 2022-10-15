@@ -8,7 +8,7 @@ export default class Block {
     FLOW_RENDER: 'flow:render',
   };
 
-  protected props: Record<string, unknown>;
+  protected props: Record<string, any>;
 
   private eventBus: () => EventBus;
 
