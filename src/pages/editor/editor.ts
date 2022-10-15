@@ -8,19 +8,17 @@ import Input from '../../components/input';
 import Block from '../../utils/block';
 
 import { getFormData, isFormValid } from '../../utils/formUtils';
+import UsersController from '../../controllers/UsersController';
+import { TUserData } from '../../types';
 
 export default class Editor extends Block {
-  constructor() {
-    super();
-  }
-
   onSubmit(e: Event) {
     e.preventDefault();
 
-    const formData = getFormData(this.getContent()!);
+    const formData = getFormData(this.getContent()!) as TUserData;
 
     if (isFormValid(formData)) {
-      console.log(formData);
+      UsersController.updateData(formData);
     }
   }
 

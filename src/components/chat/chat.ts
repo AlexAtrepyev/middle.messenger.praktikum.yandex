@@ -6,11 +6,11 @@ import Templator from '../../utils/templator';
 import Block from '../../utils/block';
 
 interface ChatProps {
-  name: string,
-  message: string,
-  text: string,
+  avatar: string,
+  title: string,
+  last_message: string,
   time: string,
-  count: string
+  unread_count: number
 }
 
 export default class Chat extends Block {

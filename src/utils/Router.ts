@@ -38,10 +38,10 @@ class Route {
 
   render() {
     if (!this.block) {
-      this.block = new this.blockClass();
+      this.block = new this.blockClass({});
 
       render(this.props, this.block);
-      // return;
+      return;
     }
   }
 }

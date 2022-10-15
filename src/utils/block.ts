@@ -14,13 +14,8 @@ export default class Block {
 
   private _element: HTMLElement | null = null;
 
-  private _meta: { tagName: string, props: any };
-
   constructor(props: any = {}) {
-    const tagName = 'div';
     const eventBus = new EventBus();
-
-    this._meta = { tagName, props };
 
     this.props = this._makePropsProxy(props);
 
@@ -31,39 +26,28 @@ export default class Block {
     eventBus.emit(Block.EVENTS.INIT);
   }
 
-  private _addEvents() {
-    const { events = {} } = this.props as { events: Record<string, () => void> };
-
-    Object.keys(events).forEach((eventName) => {
-      this._element!.addEventListener(eventName, events[eventName]);
-    });
-  }
-
   private _registerEvents(eventBus: EventBus) {
-    eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
+    eventBus.on(Block.EVENTS.INIT, this._init.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
     eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
   }
 
-  private _createResources() {
-    // const { tagName } = this._meta;
-    this._element = this._createDocumentElement();
-  }
-
-  init() {
-    this._createResources();
+  private _init() {
+    this.init();
 
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
   }
+
+  protected init() {}
 
   private _componentDidMount() {
     this.componentDidMount();
   }
 
-  componentDidMount() {}
+  protected componentDidMount() {}
 
-  dispatchComponentDidMount() {
+  public dispatchComponentDidMount() {
     this.eventBus().emit(Block.EVENTS.FLOW_CDM);
   }
 
@@ -73,11 +57,11 @@ export default class Block {
     }
   }
 
-  componentDidUpdate(oldProps: any, newProps: any) {
+  protected componentDidUpdate(oldProps: any, newProps: any) {
     return true;
   }
 
-  setProps = (nextProps: any) => {
+  public setProps = (nextProps: any) => {
     if (!nextProps) {
       return;
     }
@@ -90,19 +74,17 @@ export default class Block {
   }
 
   private _render() {
-    const block = this.render();
-
-    this._element = block;
-
-    // this._addEvents();
+    this._element = this.render();
+    document.body.innerHTML = '';
+    document.body.appendChild(this._element);
   }
 
-  render(): HTMLElement {
+  protected render(): HTMLElement {
     return document.createElement('div');
   }
 
-  getContent() {
-    return this.element;
+  public getContent() {
+    return this._element;
   }
 
   private _makePropsProxy(props: any) {
@@ -125,9 +107,5 @@ export default class Block {
         throw new Error('Нет доступа');
       },
     });
-  }
-
-  private _createDocumentElement(): HTMLElement {
-    return document.createElement(this._meta.tagName);
   }
 }

@@ -279,6 +279,7 @@ function replaceTmplValues(tmpl: string, ctx: { [key: string]: any }): any {
 
         if (data.isHtml) {
           tmpl = data;
+          console.log(tmpl);
           continue;
         }
       }
@@ -299,8 +300,19 @@ function setElements(
 
     if (node.tag) {
       if (startsWithUpperCase(node.tag)) {
-        const Class = get(ctx, node.tag);
-        node.element = new Class({ ...node.attrs }).getContent();
+        if (node.tag === 'Fragment') {
+          const content = node.attrs!.content.slice(2, -2).trim();
+          node.element = get(ctx, content);
+        } else {
+          const Class = get(ctx, node.tag);
+          if (node.attrs) {
+            Object.keys(node.attrs).forEach((key) => {
+              const value = replaceTmplValues(node.attrs![key], ctx);
+              node.attrs![key] = value;
+            });
+          }
+          node.element = new Class({ ...node.attrs }).getContent();
+        }
       } else {
         const element = document.createElement(node.tag);
         if (node.attrs) {

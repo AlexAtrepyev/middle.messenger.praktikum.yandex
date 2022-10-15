@@ -4,12 +4,9 @@ export default `
     <div class="settings">
       <Link to="/settings" text="Profile" />
       <input type="search" name="search">
+      <button class="link" onclick="{{ onCreateChat }}">Create chat</button>
     </div>
-    <ul class="chats">
-      <Chat name="Alex" message="Hello" text="link" time="11.03.22" count="1" />
-      <Chat name="Jack" message="See you later" text="link" time="11.03.22" count="3" />
-      <Chat name="Veronica" message="You are so pretty ;)" text="link" time="11.03.22" count="2" />
-    </ul>
+    <Fragment content="{{ chatList }}" />
   </div>
   <div class="feed">
     <div class="feed__header">
@@ -18,8 +15,8 @@ export default `
         <h2 class="feed__name">Chat name</h2>
       </div>
       <div class="feed__container">
-        <button>Add user</button>
-        <button>Remove user</button>
+        <button onclick="{{ onAddUser }}">Add user</button>
+        <button onclick="{{ onRemoveUser }}">Remove user</button>
       </div>
     </div>
     <div class="feed__messages">
