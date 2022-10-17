@@ -14,7 +14,7 @@ import ChatsController from '../../controllers/ChatsController';
 import store, { StateEvents } from '../../utils/Store';
 import AuthController from '../../controllers/AuthController';
 import MessagesController from '../../controllers/MessagesController';
-import randomInt from '../../utils/randomInt';
+import { TMessage } from '../../types';
 
 export default class Main extends Block {
   constructor() {
@@ -41,9 +41,12 @@ export default class Main extends Block {
 
       const { messages, selectedChat } = store.getState();
       if (messages && selectedChat) {
-        const selectedMessages = messages[selectedChat].filter(
-          (message) => message?.id !== undefined,
-        );
+        let selectedMessages: TMessage[] = [];
+        if (messages[selectedChat]) {
+          selectedMessages = messages[selectedChat].filter(
+            (message) => message?.id !== undefined,
+          );
+        }
 
         const messageList = document.createElement('div');
         messageList.classList.add('feed__messages');
@@ -61,15 +64,31 @@ export default class Main extends Block {
   }
 
   createChat() {
-    ChatsController.create(`Chat${randomInt(0, 1000)}`);
+    const { value } = document.querySelector('#chatTitle') as HTMLInputElement;
+
+    if (isFormValid({ message: value })) {
+      ChatsController.create(value);
+    }
   }
 
   addUser() {
-    ChatsController.addUsers({ users: [1], chatId: 180 });
+    const { value } = document.querySelector('#addUser') as HTMLInputElement;
+
+    const { selectedChat } = store.getState();
+
+    if (Number(value) && selectedChat) {
+      ChatsController.addUsers({ users: [Number(value)], chatId: selectedChat });
+    }
   }
 
   removeUser() {
-    ChatsController.removeUsers({ users: [1], chatId: 180 });
+    const { value } = document.querySelector('#removeUser') as HTMLInputElement;
+
+    const { selectedChat } = store.getState();
+
+    if (Number(value) && selectedChat) {
+      ChatsController.removeUsers({ users: [Number(value)], chatId: selectedChat });
+    }
   }
 
   onSubmit(e: Event) {

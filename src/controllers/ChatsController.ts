@@ -12,15 +12,16 @@ export class ChatsController {
 
   async get() {
     try {
+      store.set('chats', undefined);
       const chats = await this.api.get();
       store.set('chats', chats);
 
-      store.getState().chats?.map(async (chat) => {
+      chats.map(async (chat) => {
         const token = await api.getToken(chat.id);
         await MessagesController.connect(chat.id, token);
       });
     } catch (e) {
-      console.error(e.reason);
+      console.error(e);
     }
   }
 
@@ -29,7 +30,7 @@ export class ChatsController {
       await this.api.create(data);
       await this.get();
     } catch (e) {
-      console.error(e.reason);
+      console.error(e);
     }
   }
 
@@ -37,7 +38,7 @@ export class ChatsController {
     try {
       await this.api.addUsers(data);
     } catch (e) {
-      console.error(e.reason);
+      console.error(e);
     }
   }
 
@@ -45,7 +46,7 @@ export class ChatsController {
     try {
       await this.api.removeUsers(data);
     } catch (e) {
-      console.error(e.reason);
+      console.error(e);
     }
   }
 

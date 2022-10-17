@@ -1,50 +1,5 @@
 import Block from './block';
-
-function render(query: string, block: Block): Element {
-  const root = document.querySelector(query);
-
-  if (root === null) {
-    throw new Error(`${query} not found`);
-  }
-
-  root.innerHTML = '';
-  root.appendChild(block.getContent()!);
-
-  return root;
-}
-
-class Route {
-  private block: Block | null = null;
-
-  private pathname: string;
-
-  private readonly blockClass: typeof Block;
-
-  private readonly props: string;
-
-  constructor(pathname: string, view: typeof Block, props: string) {
-    this.pathname = pathname;
-    this.blockClass = view;
-    this.props = props;
-  }
-
-  leave() {
-    this.block = null;
-  }
-
-  match(pathname: string) {
-    return pathname === this.pathname;
-  }
-
-  render() {
-    if (!this.block) {
-      this.block = new this.blockClass({});
-
-      render(this.props, this.block);
-      return;
-    }
-  }
-}
+import Route from './Route';
 
 class Router {
   private static __instance: Router;

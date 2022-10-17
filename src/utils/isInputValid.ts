@@ -5,6 +5,7 @@ export default function isInputValid(name: string, value: string): boolean {
   const PASSWORD_REGEXP = /^(?=.*[A-Z].*)(?=.*[0-9].*).{8,40}$/;
   const PHONE_REGEXP = /^\+?\d{10,15}$/;
   const MESSAGE_REGEXP = /.+/;
+  const ID_REGEXP = /\d{,10}/;
 
   switch (name) {
     case 'first_name':
@@ -29,6 +30,8 @@ export default function isInputValid(name: string, value: string): boolean {
       return PHONE_REGEXP.test(value);
     case 'message':
       return MESSAGE_REGEXP.test(value);
+    case 'id':
+      return ID_REGEXP.test(value);
     default:
       return false;
   }

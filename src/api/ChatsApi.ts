@@ -7,7 +7,7 @@ export class ChatsApi extends BaseApi {
   }
 
   get() {
-    return this.http.get<{ chats: TChat[] }>('');
+    return this.http.get<TChat[]>('');
   }
 
   create(title: string) {

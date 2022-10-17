@@ -1,7 +1,6 @@
 import AuthController from './controllers/AuthController';
 import './index.css';
 
-// import PageMarket from './pages/page-market';
 import Authorization from './pages/authorization';
 import AvatarChanger from './pages/avatar-changer';
 import Editor from './pages/editor';
@@ -14,7 +13,7 @@ import ServerError from './pages/server-error';
 
 import Router from './utils/Router';
 
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('DOMContentLoaded', async () => {
   Router
     .use('/', Authorization)
     .use('/sign-up', Registration)
@@ -22,6 +21,32 @@ window.addEventListener('DOMContentLoaded', () => {
     .use('/settings/editor', Editor)
     .use('/settings/password', PasswordChanger)
     .use('/settings/avatar', AvatarChanger)
-    .use('/messenger', Main)
-    .start();
+    .use('/messenger', Main);
+
+  let isProtectedRoute = true;
+
+  switch (window.location.pathname) {
+    case '/':
+    case '/sign-in':
+      isProtectedRoute = false;
+      break;
+    default:
+      break;
+  }
+
+  try {
+    await AuthController.getUser();
+
+    Router.start();
+
+    if (!isProtectedRoute) {
+      Router.go('/messenger');
+    }
+  } catch (e) {
+    Router.start();
+
+    if (isProtectedRoute) {
+      Router.go('/');
+    }
+  }
 });

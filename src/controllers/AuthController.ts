@@ -17,7 +17,7 @@ export class AuthController {
       await this.getUser();
       Router.go('/messenger');
     } catch (e) {
-      console.error(e.reason);
+      console.error(e);
     }
   }
 
@@ -27,7 +27,7 @@ export class AuthController {
       await this.getUser();
       Router.go('/messenger');
     } catch (e) {
-      console.error(e.reason);
+      console.error(e);
     }
   }
 
@@ -41,9 +41,10 @@ export class AuthController {
     try {
       MessagesController.closeAll();
       await this.api.logout();
+      store.clear();
       Router.go('/');
     } catch (e) {
-      console.error(e.reason);
+      console.error(e);
     }
   }
 }

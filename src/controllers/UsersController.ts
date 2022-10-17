@@ -15,7 +15,7 @@ export class UsersController {
 
       Router.go('/settings');
     } catch (e) {
-      console.error(e.reason);
+      console.error(e);
     }
   }
 
@@ -25,7 +25,7 @@ export class UsersController {
 
       Router.go('/settings');
     } catch (e) {
-      console.error(e.reason);
+      console.error(e);
     }
   }
 
@@ -35,7 +35,7 @@ export class UsersController {
 
       Router.go('/settings');
     } catch (e) {
-      console.error(e.reason);
+      console.error(e);
     }
   }
 }
