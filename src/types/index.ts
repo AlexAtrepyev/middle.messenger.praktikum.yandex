@@ -12,7 +12,7 @@ export type TSignupData = {
   phone: string;
 };
 
-export type TUserData = {
+export type TUserEditorData = {
   first_name: string;
   second_name: string;
   display_name: string;
@@ -21,14 +21,25 @@ export type TUserData = {
   phone: string;
 };
 
-export type TUserPasswords = {
+export type TChangePasswordData = {
   oldPassword: string;
   newPassword: string;
 };
 
 export type TChatUsers = {
-  users: number[],
-  chatId: number
+  users: number[];
+  chatId: number;
+};
+
+export type TUser = {
+  avatar: string | null;
+  display_name: string | null;
+  email: string;
+  first_name: string;
+  id: number;
+  login: string;
+  phone: string;
+  second_name: string;
 };
 
 export type TChat = {
@@ -43,7 +54,7 @@ export type TChat = {
       email: string;
       login: string;
       phone: string;
-    },
+    };
     time: string;
     content: string;
   };
@@ -52,11 +63,13 @@ export type TChat = {
 };
 
 export type TMessage = {
-  chat_id: number;
+  id: number;
+  chat_id?: number;
   time: string;
   type: string;
   user_id: number;
   content: string;
+  is_read?: boolean;
   file?: {
     id: number;
     user_id: number;
@@ -65,5 +78,12 @@ export type TMessage = {
     content_type: string;
     content_size: number;
     upload_date: string;
-  }
+  };
+};
+
+export type TState = {
+  user?: TUser;
+  chats?: TChat[];
+  selectedChat?: number;
+  messages?: Record<number, TMessage[]>;
 };

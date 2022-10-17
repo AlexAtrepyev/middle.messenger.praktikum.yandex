@@ -41,14 +41,14 @@ export default class Main extends Block {
 
       const { messages, selectedChat } = store.getState();
       if (messages && selectedChat) {
-        const selectedMesseges = messages[selectedChat].filter(
-          (message) => message?.chat_id !== undefined,
+        const selectedMessages = messages[selectedChat].filter(
+          (message) => message?.id !== undefined,
         );
 
         const messageList = document.createElement('div');
         messageList.classList.add('feed__messages');
 
-        selectedMesseges.forEach((message) => {
+        selectedMessages.reverse().forEach((message) => {
           messageList.appendChild(new Message({
             ...message,
             type: message.user_id === store.getState().user?.id ? 'mine' : 'others',
@@ -64,11 +64,11 @@ export default class Main extends Block {
     ChatsController.create(`Chat${randomInt(0, 1000)}`);
   }
 
-  AddUser() {
+  addUser() {
     ChatsController.addUsers({ users: [1], chatId: 180 });
   }
 
-  RemoveUser() {
+  removeUser() {
     ChatsController.removeUsers({ users: [1], chatId: 180 });
   }
 
@@ -88,8 +88,8 @@ export default class Main extends Block {
         (chat) => chat.id === store.getState().selectedChat,
       )?.title || '',
       onCreateChat: this.createChat.bind(this),
-      onAddUser: this.AddUser.bind(this),
-      onRemoveUser: this.RemoveUser.bind(this),
+      onAddUser: this.addUser.bind(this),
+      onRemoveUser: this.removeUser.bind(this),
       onSubmit: this.onSubmit.bind(this),
       Link,
       ...this.props,

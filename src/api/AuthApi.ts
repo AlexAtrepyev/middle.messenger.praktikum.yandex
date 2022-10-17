@@ -1,5 +1,5 @@
 import BaseApi from './BaseApi';
-import { TSigninData, TSignupData } from '../types';
+import { TSigninData, TSignupData, TUser } from '../types';
 
 export class AuthApi extends BaseApi {
   constructor() {
@@ -15,7 +15,7 @@ export class AuthApi extends BaseApi {
   }
 
   getUser() {
-    return this.http.get('/user');
+    return this.http.get<{ user: TUser }>('/user');
   }
 
   logout() {

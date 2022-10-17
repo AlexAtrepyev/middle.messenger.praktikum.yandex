@@ -43,7 +43,11 @@ export default class HTTPTransport {
       xhr.open(method, url);
 
       xhr.onload = () => {
-        resolve(xhr.response);
+        if (xhr.status < 400) {
+          resolve(xhr.response);
+        } else {
+          reject(xhr.response);
+        }
       };
 
       xhr.onabort = reject;

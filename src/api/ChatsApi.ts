@@ -1,5 +1,5 @@
 import BaseApi from './BaseApi';
-import { TChatUsers } from '../types';
+import { TChat, TChatUsers } from '../types';
 
 export class ChatsApi extends BaseApi {
   constructor() {
@@ -7,7 +7,7 @@ export class ChatsApi extends BaseApi {
   }
 
   get() {
-    return this.http.get('');
+    return this.http.get<{ chats: TChat[] }>('');
   }
 
   create(title: string) {
@@ -23,9 +23,7 @@ export class ChatsApi extends BaseApi {
   }
 
   async getToken(id: number) {
-    const response = await this.http.post<{ token: string }>(`/token/${id}`);
-
-    return response.token;
+    return this.http.post<{ token: string }>(`/token/${id}`).then((res) => res.token);
   }
 
   read = undefined;

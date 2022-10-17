@@ -9,13 +9,13 @@ import Block from '../../utils/block';
 
 import { getFormData, isFormValid } from '../../utils/formUtils';
 import UsersController from '../../controllers/UsersController';
-import { TUserData } from '../../types';
+import { TUserEditorData } from '../../types';
 
 export default class Editor extends Block {
   onSubmit(e: Event) {
     e.preventDefault();
 
-    const formData = getFormData(this.getContent()!) as TUserData;
+    const formData = getFormData(this.getContent()!) as TUserEditorData;
 
     if (isFormValid(formData)) {
       UsersController.updateData(formData);

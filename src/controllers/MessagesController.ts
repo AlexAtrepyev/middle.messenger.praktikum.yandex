@@ -1,6 +1,7 @@
 import WSTransport, { WSTransportEvents } from '../utils/WSTransport';
 import store from '../utils/Store';
 import { TMessage } from '../types';
+import ChatsController from './ChatsController';
 
 class MessagesController {
   private sockets: Map<number, WSTransport> = new Map();
@@ -33,6 +34,8 @@ class MessagesController {
       type: 'message',
       content: message,
     });
+
+    ChatsController.get();
   }
 
   fetchOldMessages(id: number) {
@@ -51,21 +54,15 @@ class MessagesController {
 
   private onMessage(id: number, messages: TMessage | TMessage[]) {
     let messagesToAdd: TMessage[] = [];
-
     if (Array.isArray(messages)) {
-      messagesToAdd = messages;
+      messagesToAdd = [...messages].reverse();
     } else {
       messagesToAdd.push(messages);
     }
 
-    let currentMessages: TMessage[] = [];
-    if (store.getState().messages) {
-      currentMessages = currentMessages.concat(store.getState().messages![id]);
-    }
+    const currentMessages = (store.getState().messages || {})[id] || [];
 
-    messagesToAdd = [...currentMessages, ...messagesToAdd];
-
-    store.set(`messages.${id}`, messagesToAdd);
+    store.set(`messages.${id}`, [...currentMessages, ...messagesToAdd]);
   }
 
   private onClose(id: number) {

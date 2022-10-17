@@ -1,12 +1,12 @@
 import BaseApi from './BaseApi';
-import { TUserData, TUserPasswords } from '../types';
+import { TUserEditorData, TChangePasswordData } from '../types';
 
 export class UsersApi extends BaseApi {
   constructor() {
     super('/user');
   }
 
-  updateData(data: TUserData) {
+  updateData(data: TUserEditorData) {
     return this.http.put('/profile', { data });
   }
 
@@ -14,7 +14,7 @@ export class UsersApi extends BaseApi {
     return this.http.put('/profile/avatar', { data });
   }
 
-  updatePassword(data: TUserPasswords) {
+  updatePassword(data: TChangePasswordData) {
     return this.http.put('/password', { data });
   }
 
