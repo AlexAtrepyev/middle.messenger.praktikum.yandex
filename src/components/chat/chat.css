@@ -6,6 +6,11 @@
   grid-template-columns: 25% 50% 25%;
   border-top: 1px solid lightgrey;
   border-bottom: 1px solid lightgrey;
+  cursor: pointer;
+}
+
+.chat_selected {
+  background-color: #e4edfd;
 }
 
 .chat__image {

@@ -8,19 +8,17 @@ import Input from '../../components/input';
 import Block from '../../utils/block';
 
 import { getFormData, isFormValid } from '../../utils/formUtils';
+import UsersController from '../../controllers/UsersController';
+import { TChangePasswordData } from '../../types';
 
 export default class PasswordChanger extends Block {
-  constructor() {
-    super();
-  }
-
   onSubmit(e: Event) {
     e.preventDefault();
 
-    const formData = getFormData(this.getContent()!);
+    const formData = getFormData(this.getContent()!) as TChangePasswordData;
 
     if (isFormValid(formData)) {
-      console.log(formData);
+      UsersController.updatePassword(formData);
     }
   }
 

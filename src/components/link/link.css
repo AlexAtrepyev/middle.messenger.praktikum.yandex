@@ -1,0 +1,11 @@
+.link {
+  padding: 0;
+  background-color: inherit;
+  border: none;
+  color: #0969da;
+}
+
+.link:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}

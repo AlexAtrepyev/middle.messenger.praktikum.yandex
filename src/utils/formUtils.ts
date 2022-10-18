@@ -1,6 +1,6 @@
 import isInputValid from './isInputValid';
 
-type TFormData = { [key: string]: string };
+type TFormData = { [key: string]: any };
 
 export function getFormData(content: HTMLElement): TFormData {
   const form = content.querySelector('form')!;

@@ -10,55 +10,65 @@ type Options = {
   data?: any;
 };
 
-type OptionsWithoutMethod = Omit<Options, 'method'>;
-
-function queryStringify(data: object) {
-  const keys = Object.keys(data);
-
-  return keys.reduce((result, key, index) => {
-    const value = data[key];
-    return `${result}${key}=${value}${index < keys.length - 1 ? '&' : ''}`;
-  }, '?');
-}
-
 export default class HTTPTransport {
-  get(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
-    return this.request(url, { ...options, method: Method.GET });
+  protected url: string;
+
+  constructor(url: string) {
+    this.url = url;
   }
 
-  post(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
-    return this.request(url, { ...options, method: Method.POST });
+  public get<Response>(endpoint: string): Promise<Response> {
+    return this.request<Response>(`${this.url}${endpoint}`);
   }
 
-  put(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
-    return this.request(url, { ...options, method: Method.PUT });
+  public post<Response>(endpoint: string, data?: any): Promise<Response> {
+    return this.request<Response>(`${this.url}${endpoint}`, { ...data, method: Method.POST });
   }
 
-  delete(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
-    return this.request(url, { ...options, method: Method.DELETE });
+  public put<Response>(endpoint: string, data?: any): Promise<Response> {
+    return this.request<Response>(`${this.url}${endpoint}`, { ...data, method: Method.PUT });
   }
 
-  request(url: string, options: Options = { method: Method.GET }): Promise<XMLHttpRequest> {
+  public delete<Response>(endpoint: string, data?: any): Promise<Response> {
+    return this.request<Response>(`${this.url}${endpoint}`, { ...data, method: Method.DELETE });
+  }
+
+  private request<Response>(url: string, options: Options = { method: Method.GET }):
+  Promise<Response> {
     const { method, data } = options;
 
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
-      const isGet = method === Method.GET;
 
-      xhr.open(method, isGet && !!data ? `${url}${queryStringify(data)}` : url);
+      xhr.open(method, url);
 
       xhr.onload = () => {
-        resolve(xhr);
+        if (xhr.status < 400) {
+          resolve(xhr.response);
+        } else {
+          reject(xhr.response);
+        }
       };
 
       xhr.onabort = reject;
       xhr.onerror = reject;
       xhr.ontimeout = reject;
 
-      if (isGet || !data) {
-        xhr.send();
+      xhr.withCredentials = true;
+      xhr.responseType = 'json';
+
+      if (method === Method.PUT && data instanceof File) {
+        const file = new FormData();
+        file.append('avatar', data);
+        xhr.send(file);
       } else {
-        xhr.send(data);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+
+        if (method === Method.GET || !data) {
+          xhr.send();
+        } else {
+          xhr.send(JSON.stringify(data));
+        }
       }
     });
   }
