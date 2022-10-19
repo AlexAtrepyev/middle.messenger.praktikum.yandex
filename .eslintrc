@@ -27,6 +27,8 @@
     "new-cap": "warn",
     "no-constructor-return": "warn",
     "no-use-before-define": "warn",
-    "no-useless-return": "warn"
+    "no-useless-return": "warn",
+    "no-undef": "warn",
+    "import/no-extraneous-dependencies": "warn"
   }
 }
