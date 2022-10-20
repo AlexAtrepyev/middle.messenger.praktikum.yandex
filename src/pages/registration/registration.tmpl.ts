@@ -8,7 +8,7 @@ export default `
     <Input label="Email" type="email" name="email" />
     <Input label="Password" type="password" name="password" />
     <Input label="Phone" type="number" name="phone" />
-    <button>Sign up</button>
+    <button class="registration__submit">Sign up</button>
   </form>
   <Link to="/" text="Sign in" />
 </div>

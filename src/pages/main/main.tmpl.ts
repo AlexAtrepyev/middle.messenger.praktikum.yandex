@@ -29,8 +29,8 @@ export default `
     </div>
     <Fragment content="{{ messageList }}" />
     <form class="feed__input" onsubmit="{{ onSubmit }}">
-      <input type="text" name="message">
-      <button type="submit">Send</button>
+      <input class="feed__text" type="text" name="message">
+      <button class="feed__submit" type="submit">Send</button>
     </form>
   </div>
 </main>

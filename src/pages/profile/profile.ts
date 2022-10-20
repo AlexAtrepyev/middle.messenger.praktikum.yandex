@@ -1,4 +1,4 @@
-import './profile.css';
+import './profile.scss';
 
 import template from './profile.tmpl';
 import Templator from '../../utils/templator';

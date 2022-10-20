@@ -1,3 +1,6 @@
+$mine-message-color: #3369f3;
+$others-message-color: #f8f8f8;
+
 .message {
   border-radius: 10px;
   max-width: 50%;
@@ -8,7 +11,7 @@
 }
 
 .message_type_mine {
-  background: rgb(228 237 253);
+  background: $others-message-color;
   align-self: flex-end;
 }
 
@@ -23,5 +26,5 @@
 }
 
 .message_type_mine .message__time {
-  color: rgb(51 105 243);
+  color: $mine-message-color;
 }

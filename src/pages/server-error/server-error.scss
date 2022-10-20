@@ -1,0 +1,26 @@
+%flex-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+%zero-edges {
+  padding: 0;
+  margin: 0;
+}
+
+.server-error {
+  @extend %flex-container;
+
+  gap: 25px;
+}
+
+.server-error__title {
+  @extend %zero-edges;
+
+  font-size: 24px;
+  font-weight: 900;
+  letter-spacing: -0.5px;
+  color: #24292f;
+}

@@ -1,4 +1,4 @@
-import './avatar-changer.css';
+import './avatar-changer.scss';
 
 import template from './avatar-changer.tmpl';
 import Templator from '../../utils/templator';

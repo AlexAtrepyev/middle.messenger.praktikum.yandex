@@ -1,5 +1,5 @@
 import AuthController from './controllers/AuthController';
-import './index.css';
+import './index.scss';
 
 import Authorization from './pages/authorization';
 import AvatarChanger from './pages/avatar-changer';
@@ -21,13 +21,15 @@ window.addEventListener('DOMContentLoaded', async () => {
     .use('/settings/editor', Editor)
     .use('/settings/password', PasswordChanger)
     .use('/settings/avatar', AvatarChanger)
-    .use('/messenger', Main);
+    .use('/messenger', Main)
+    .use('/not-found', NotFound)
+    .use('/server-error', ServerError);
 
   let isProtectedRoute = true;
 
   switch (window.location.pathname) {
     case '/':
-    case '/sign-in':
+    case '/sign-up':
       isProtectedRoute = false;
       break;
     default:

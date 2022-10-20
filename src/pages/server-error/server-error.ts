@@ -1,4 +1,4 @@
-import './server-error.css';
+import './server-error.scss';
 
 import template from './server-error.tmpl';
 import Templator from '../../utils/templator';

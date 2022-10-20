@@ -57,6 +57,7 @@ export default class Block {
     }
   }
 
+  // @ts-ignore
   protected componentDidUpdate(oldProps: any, newProps: any) {
     return true;
   }

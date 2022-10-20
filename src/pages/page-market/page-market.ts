@@ -1,4 +1,4 @@
-import './page-market.css';
+import './page-market.scss';
 
 import template from './page-market.tmpl';
 import Templator from '../../utils/templator';

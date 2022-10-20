@@ -16,7 +16,7 @@ export default `
     <Link to="/settings/editor" text="Edit data" />
     <Link to="/settings/password" text="Change password" />
     <Link to="/settings/avatar" text="Change avatar" />
-    <button class="link" onclick="{{ onLogout }}">Log out</button>
+    <button class="profile_logout" onclick="{{ onLogout }}">Log out</button>
   </div>
 </div>
 `;

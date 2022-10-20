@@ -1,0 +1,30 @@
+$error-color: #cf222e;
+
+.input {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.input_label {
+  font-weight: 400;
+  text-align: left;
+  font-size: 14px;
+  color: #24292f;
+}
+
+.input__field {
+  padding: 5px 12px;
+  font-size: 14px;
+  line-height: 20px;
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+  color: #24292f;
+}
+
+.input__field_invalid {
+  border-color: $error-color;
+  color: $error-color;
+}
