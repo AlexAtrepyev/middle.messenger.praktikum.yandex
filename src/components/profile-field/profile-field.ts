@@ -1,4 +1,4 @@
-import './profile-field.css';
+import './profile-field.scss';
 
 import template from './profile-field.tmpl';
 import Templator from '../../utils/templator';

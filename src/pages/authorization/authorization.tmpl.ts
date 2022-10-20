@@ -4,7 +4,7 @@ export default `
   <form class="authorization__form" onsubmit="{{ onSubmit }}">
     <Input label="Login" type="text" name="login" valid="true" />
     <Input label="Password" type="password" name="password" />
-    <button>Sign in</button>
+    <button class="authorization__submit">Sign in</button>
   </form>
   <Link to="/sign-up" text="Create account" />
 </div>

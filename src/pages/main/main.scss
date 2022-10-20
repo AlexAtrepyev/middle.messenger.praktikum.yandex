@@ -1,3 +1,15 @@
+%flex-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+%zero-edges {
+  padding: 0;
+  margin: 0;
+}
+
 .main {
   width: 100vw;
   height: 100vh;
@@ -10,9 +22,8 @@
 }
 
 .settings {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  @extend %flex-container;
+
   gap: 10px;
 }
 
@@ -23,11 +34,11 @@
 }
 
 .chats {
+  @extend %flex-container;
+
   list-style-type: none;
   padding: 10px 0;
   margin: 0;
-  display: flex;
-  flex-direction: column;
 }
 
 .feed {
@@ -56,7 +67,7 @@
 .feed__image {
   width: 50px;
   height: 50px;
-  border: 1px solid black;
+  border: 1px solid beige;
 }
 
 .feed__name {
@@ -82,4 +93,27 @@
   padding: 10px;
   border-top: 1px solid gray;
   box-sizing: border-box;
+}
+
+.feed__text {
+  padding: 5px 12px;
+  font-size: 14px;
+  line-height: 20px;
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+  color: #24292f;
+}
+
+.feed__submit {
+  width: 100%;
+  text-align: center;
+  color: #fff;
+  background-color: #2da44e;
+  border: 1px solid #1b1f2426;
+  padding: 5px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  border-radius: 6px;
+  cursor: pointer;
 }

@@ -1,4 +1,4 @@
-import './not-found.css';
+import './not-found.scss';
 
 import template from './not-found.tmpl';
 import Templator from '../../utils/templator';

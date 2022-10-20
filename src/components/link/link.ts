@@ -1,4 +1,4 @@
-import './link.css';
+import './link.scss';
 
 import template from './link.tmpl';
 import Templator from '../../utils/templator';

@@ -1,4 +1,4 @@
-import './chat.css';
+import './chat.scss';
 
 import template from './chat.tmpl';
 import Templator from '../../utils/templator';

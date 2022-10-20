@@ -1,4 +1,4 @@
-import './input.css';
+import './input.scss';
 
 import template from './input.tmpl';
 import Templator from '../../utils/templator';

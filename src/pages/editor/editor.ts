@@ -1,4 +1,4 @@
-import './editor.css';
+import './editor.scss';
 
 import template from './editor.tmpl';
 import Templator from '../../utils/templator';

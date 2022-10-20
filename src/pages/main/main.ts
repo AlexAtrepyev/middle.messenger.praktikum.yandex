@@ -1,4 +1,4 @@
-import './main.css';
+import './main.scss';
 
 import template from './main.tmpl';
 import Templator from '../../utils/templator';

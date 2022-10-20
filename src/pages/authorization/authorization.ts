@@ -1,4 +1,4 @@
-import './authorization.css';
+import './authorization.scss';
 
 import template from './authorization.tmpl';
 import Templator from '../../utils/templator';

@@ -1,5 +1,5 @@
 import AuthController from './controllers/AuthController';
-import './index.css';
+import './index.scss';
 
 import Authorization from './pages/authorization';
 import AvatarChanger from './pages/avatar-changer';

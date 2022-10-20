@@ -1,0 +1,21 @@
+.field {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid #d0d7de;
+}
+
+.field__name {
+  font-weight: 400;
+  text-align: left;
+  font-size: 18px;
+  color: #24292f;
+}
+
+.field__value {
+  font-size: 14px;
+  line-height: 20px;
+  color: #101316c7;
+}

@@ -1,4 +1,4 @@
-import './message.css';
+import './message.scss';
 
 import template from './message.tmpl';
 import Templator from '../../utils/templator';

@@ -5,6 +5,6 @@ const { window } = new JSDOM('<div id="app"></div>', { url: 'http://localhost:30
 global.window = window;
 global.document = window.document;
 
-require.extensions['.css'] = () => {
+require.extensions['.scss'] = () => {
   module.exports = () => ({});
 };

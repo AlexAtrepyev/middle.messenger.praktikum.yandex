@@ -1,4 +1,4 @@
-import './password-changer.css';
+import './password-changer.scss';
 
 import template from './password-changer.tmpl';
 import Templator from '../../utils/templator';

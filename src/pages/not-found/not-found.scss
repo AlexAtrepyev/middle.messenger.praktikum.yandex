@@ -1,0 +1,26 @@
+%flex-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+%zero-edges {
+  padding: 0;
+  margin: 0;
+}
+
+.not-found {
+  @extend %flex-container;
+
+  gap: 25px;
+}
+
+.not-found__title {
+  @extend %zero-edges;
+
+  font-size: 24px;
+  font-weight: 900;
+  letter-spacing: -0.5px;
+  color: #24292f;
+}

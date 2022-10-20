@@ -1,4 +1,4 @@
-import './registration.css';
+import './registration.scss';
 
 import template from './registration.tmpl';
 import Templator from '../../utils/templator';

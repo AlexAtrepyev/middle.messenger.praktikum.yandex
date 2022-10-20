@@ -1,0 +1,52 @@
+%flex-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+%zero-edges {
+  padding: 0;
+  margin: 0;
+}
+
+.authorization {
+  @extend %flex-container;
+  @extend %zero-edges;
+
+  box-sizing: border-box;
+  padding: 16px;
+  border: 1px solid #d8dee4;
+  border-radius: 6px;
+  background-color: #f6f8fa;
+}
+
+.authorization__title {
+  @extend %zero-edges;
+
+  font-size: 24px;
+  font-weight: 300;
+  letter-spacing: -0.5px;
+  color: #24292f;
+}
+
+.authorization__form {
+  @extend %flex-container;
+
+  gap: 10px;
+  padding: 10px 0;
+}
+
+.authorization__submit {
+  width: 100%;
+  text-align: center;
+  color: #fff;
+  background-color: #2da44e;
+  border: 1px solid #1b1f2426;
+  padding: 5px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  border-radius: 6px;
+  cursor: pointer;
+}
