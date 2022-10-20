@@ -1,5 +1,5 @@
 ## Messenger
-Welcome to the [Messenger](https://dashboard.heroku.com/apps/vanilla-ts-messenger/activity) repository!
+Welcome to the [Messenger](https://vanilla-ts-messenger.herokuapp.com) repository!
 
 ## Description
 Messenger is a project inspired by Telegram
