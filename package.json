@@ -6,14 +6,12 @@
     "node": ">=14.17.0"
   },
   "scripts": {
-    "dev": "parcel ./src/index.html",
-    "build": "webpack --mode=production --node-env=production",
-    "start": "npm run build && node ./server.ts",
     "lint": "npx eslint . --ext .ts",
     "stylelint": "npx stylelint \"**/*.css\"",
     "test": "mocha --require ts-node/register --require ./mochaSetup.js './src/**/*.test.ts'",
     "build:dev": "webpack --mode=development",
     "build:prod": "webpack --mode=production --node-env=production",
+    "start": "node ./server.ts",
     "watch": "webpack --watch",
     "serve": "webpack serve"
   },
@@ -60,6 +58,7 @@
     "webpack-dev-server": "4.11.1"
   },
   "dependencies": {
-    "express": "4.18.1"
+    "express": "4.18.1",
+    "express-history-api-fallback": "2.2.1"
   }
 }
