@@ -18,12 +18,18 @@ Following technologies are used in project:
 - Websocket
 - Mocha
 - Chai
+- Husky
 
 Features is created in project:
 - Templator
 - Routing
 - HTTP API
 - Websocket API
+
+## CI/CD
+- automation testing with `Mocha/Chai`
+- precommit with `Husky`
+- `Heroku` automatic deploy
 
 ## Scripts
 
