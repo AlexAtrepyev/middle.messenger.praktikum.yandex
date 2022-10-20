@@ -23,4 +23,4 @@ COPY --from=builder /var/www/app/server.ts ./
 
 EXPOSE 3000
 
-CMD npm run start
+CMD npm run docker:run

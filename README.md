@@ -41,6 +41,7 @@ Features is created in project:
 - `npm run build:dev` — used for development building
 - `npm run build:prod` — used for production building
 - `npm run start` — used for running production build on local server
+- `npm run docker:run` — used for running production build on docker
 - `npm run watch` — used for watching files and recompile whenever they change
 - `npm run serve` — used for running live development server
 
