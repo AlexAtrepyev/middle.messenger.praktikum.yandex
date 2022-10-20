@@ -27,7 +27,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 
   switch (window.location.pathname) {
     case '/':
-    case '/sign-in':
+    case '/sign-up':
       isProtectedRoute = false;
       break;
     default:
